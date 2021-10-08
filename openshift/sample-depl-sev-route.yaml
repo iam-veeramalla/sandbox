@@ -1,0 +1,41 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: example
+spec:
+  host: example.local
+  wildcardPolicy: None
+  to:
+    name: example
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: example
+spec:
+  selector:
+    k8s-app: example
+  ports:
+  - port: 80
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: example
+  labels:
+    k8s-app: example
+spec:
+  selector:
+    matchLabels:
+      k8s-app: example
+  template:
+    metadata:
+      labels:
+        k8s-app: example
+    spec:
+      containers:
+      - image: openshift/deployment-example:v1
+        name: web
+        ports:
+        - containerPort: 8080
