@@ -1,0 +1,145 @@
+- apiVersion: argoproj.io/v1alpha1
+  kind: ArgoCD
+  metadata:
+    name: openshift-gitops
+    namespace: openshift-gitops
+  spec:
+    applicationSet:
+      resources:
+        limits:
+          cpu: '2'
+          memory: 1Gi
+        requests:
+          cpu: 250m
+          memory: 512Mi
+    controller:
+      processors: {}
+      resources:
+        limits:
+          cpu: '16'
+          memory: 32Gi
+        requests:
+          cpu: '1'
+          memory: 2Gi
+      sharding: {}
+    dex:
+      openShiftOAuth: true
+      resources:
+        limits:
+          cpu: 500m
+          memory: 256Mi
+        requests:
+          cpu: 250m
+          memory: 128Mi
+    grafana:
+      enabled: false
+      ingress:
+        enabled: false
+      resources:
+        limits:
+          cpu: 500m
+          memory: 256Mi
+        requests:
+          cpu: 250m
+          memory: 128Mi
+      route:
+        enabled: false
+    ha:
+      enabled: false
+      resources:
+        limits:
+          cpu: 500m
+          memory: 256Mi
+        requests:
+          cpu: 250m
+          memory: 128Mi
+    initialSSHKnownHosts: {}
+    kustomizeBuildOptions: '--enable-alpha-plugins'
+    prometheus:
+      enabled: false
+      ingress:
+        enabled: false
+      route:
+        enabled: false
+    rbac:
+      policy: 'g, system:cluster-admins, role:admin'
+      scopes: '[groups]'
+    redis:
+      resources:
+        limits:
+          cpu: 500m
+          memory: 8Gi
+        requests:
+          cpu: 250m
+          memory: 256Mi
+    repo:
+      env:
+        - name: ARGOCD_EXEC_TIMEOUT
+          value: 360s
+        - name: KUSTOMIZE_PLUGIN_HOME
+          value: xxxxxxxxxxxxxx
+      initContainers:
+        - args:
+            - /.config
+          command:
+            - /exportkustomize.sh
+          image: >-
+            xxxxxxxxxxxxxxxxxxxxxxxxx
+          imagePullPolicy: Always
+          name: kustomize-plugin
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: xxxxxxxx
+              name: kustomize
+      resources:
+        limits:
+          cpu: '8'
+          memory: 16Gi
+        requests:
+          cpu: '1'
+          memory: 2Gi
+      volumeMounts:
+        - mountPath: xxxxxxxx
+          name: kustomize
+      volumes:
+        - name: kustomize
+    resourceExclusions: |
+      - apiGroups:
+        - tekton.dev
+        clusters:
+        - '*'
+        kinds:
+        - TaskRun
+        - PipelineRun
+    server:
+      autoscale:
+        enabled: false
+      grpc:
+        ingress:
+          enabled: false
+      ingress:
+        enabled: false
+      resources:
+        limits:
+          cpu: 500m
+          memory: 256Mi
+        requests:
+          cpu: 125m
+          memory: 128Mi
+      route:
+        enabled: true
+      service:
+        type: ''
+    tls:
+      ca: {}
+  status:
+    applicationController: Running
+    dex: Running
+    phase: Available
+    redis: Running
+    repo: Running
+    server: Running
+    ssoConfig: Success
+
