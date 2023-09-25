@@ -1,455 +1,414 @@
-kind: Pod
-apiVersion: v1
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
 metadata:
-  generateName: keycloak-1-
   annotations:
-    k8s.ovn.org/pod-networks: >-
-      {"default":{"ip_addresses":["10.128.2.24/23"],"mac_address":"0a:58:0a:80:02:18","gateway_ips":["10.128.2.1"],"ip_address":"10.128.2.24/23","gateway_ip":"10.128.2.1"}}
-    k8s.v1.cni.cncf.io/network-status: |-
-      [{
-          "name": "ovn-kubernetes",
-          "interface": "eth0",
-          "ips": [
-              "10.128.2.24"
-          ],
-          "mac": "0a:58:0a:80:02:18",
-          "default": true,
-          "dns": {}
-      }]
-    openshift.io/deployment-config.latest-version: '1'
-    openshift.io/deployment-config.name: keycloak
-    openshift.io/deployment.name: keycloak-1
-  resourceVersion: '60519'
-  name: keycloak-1-6tjvt
-  uid: 227d93bb-ad59-4155-bed8-7a35596842d2
-  creationTimestamp: '2023-08-22T11:13:41Z'
+    argocd.argoproj.io/realm-created: 'false'
+  resourceVersion: '3875641'
+  name: keycloak
+  uid: f7269dd8-4e25-4ba0-8dd0-8edd48e8df60
+  creationTimestamp: '2023-09-25T11:23:26Z'
+  generation: 2
   managedFields:
-    - manager: ip-10-0-140-174
+    - manager: openshift-controller-manager
       operation: Update
-      apiVersion: v1
-      time: '2023-08-22T11:13:41Z'
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:metadata':
-          'f:annotations':
-            'f:k8s.ovn.org/pod-networks': {}
-    - manager: kube-controller-manager
-      operation: Update
-      apiVersion: v1
-      time: '2023-08-22T11:13:41Z'
+      apiVersion: apps.openshift.io/v1
+      time: '2023-09-25T11:23:26Z'
       fieldsType: FieldsV1
       fieldsV1:
         'f:metadata':
           'f:annotations':
             .: {}
-            'f:openshift.io/deployment-config.latest-version': {}
-            'f:openshift.io/deployment-config.name': {}
-            'f:openshift.io/deployment.name': {}
-          'f:generateName': {}
+            'f:argocd.argoproj.io/realm-created': {}
           'f:labels':
             .: {}
             'f:application': {}
-            'f:deployment': {}
-            'f:deploymentConfig': {}
-            'f:deploymentconfig': {}
+            'f:template.openshift.io/template-instance-owner': {}
           'f:ownerReferences':
             .: {}
-            'k:{"uid":"ea0d3815-5095-48bf-8824-98b4b932e265"}': {}
+            'k:{"uid":"a74653f0-36af-4354-b9d0-efaa7d8f133c"}': {}
         'f:spec':
-          'f:volumes':
+          'f:replicas': {}
+          'f:selector':
             .: {}
-            'k:{"name":"service-ca"}':
+            'f:deploymentConfig': {}
+          'f:strategy':
+            'f:activeDeadlineSeconds': {}
+            'f:recreateParams':
               .: {}
-              'f:configMap':
+              'f:timeoutSeconds': {}
+            'f:resources':
+              'f:limits':
                 .: {}
-                'f:defaultMode': {}
-                'f:name': {}
-              'f:name': {}
-            'k:{"name":"sso-probe-netrc-volume"}':
+                'f:cpu': {}
+                'f:memory': {}
+              'f:requests':
+                .: {}
+                'f:cpu': {}
+                'f:memory': {}
+            'f:type': {}
+          'f:template':
+            .: {}
+            'f:metadata':
               .: {}
-              'f:emptyDir':
+              'f:creationTimestamp': {}
+              'f:labels':
                 .: {}
-                'f:medium': {}
+                'f:application': {}
+                'f:deploymentConfig': {}
               'f:name': {}
-            'k:{"name":"sso-x509-https-volume"}':
+            'f:spec':
+              'f:volumes':
+                .: {}
+                'k:{"name":"service-ca"}':
+                  .: {}
+                  'f:configMap':
+                    .: {}
+                    'f:defaultMode': {}
+                    'f:name': {}
+                  'f:name': {}
+                'k:{"name":"sso-probe-netrc-volume"}':
+                  .: {}
+                  'f:emptyDir':
+                    .: {}
+                    'f:medium': {}
+                  'f:name': {}
+                'k:{"name":"sso-x509-https-volume"}':
+                  .: {}
+                  'f:name': {}
+                  'f:secret':
+                    .: {}
+                    'f:defaultMode': {}
+                    'f:secretName': {}
+              'f:containers':
+                .: {}
+                'k:{"name":"keycloak"}':
+                  'f:image': {}
+                  'f:volumeMounts':
+                    .: {}
+                    'k:{"mountPath":"/etc/x509/https"}':
+                      .: {}
+                      'f:mountPath': {}
+                      'f:name': {}
+                      'f:readOnly': {}
+                    'k:{"mountPath":"/mnt/rh-sso"}':
+                      .: {}
+                      'f:mountPath': {}
+                      'f:name': {}
+                    'k:{"mountPath":"/var/run/configmaps/service-ca"}':
+                      .: {}
+                      'f:mountPath': {}
+                      'f:name': {}
+                      'f:readOnly': {}
+                  'f:terminationMessagePolicy': {}
+                  .: {}
+                  'f:resources':
+                    .: {}
+                    'f:limits':
+                      .: {}
+                      'f:cpu': {}
+                      'f:memory': {}
+                    'f:requests':
+                      .: {}
+                      'f:cpu': {}
+                      'f:memory': {}
+                  'f:livenessProbe':
+                    .: {}
+                    'f:exec':
+                      .: {}
+                      'f:command': {}
+                    'f:failureThreshold': {}
+                    'f:initialDelaySeconds': {}
+                    'f:periodSeconds': {}
+                    'f:successThreshold': {}
+                    'f:timeoutSeconds': {}
+                  'f:env':
+                    'k:{"name":"DB_TX_ISOLATION"}':
+                      .: {}
+                      'f:name': {}
+                    'k:{"name":"SSO_HOSTNAME"}':
+                      .: {}
+                      'f:name': {}
+                    'k:{"name":"DB_MAX_POOL_SIZE"}':
+                      .: {}
+                      'f:name': {}
+                    'k:{"name":"OPENSHIFT_DNS_PING_SERVICE_PORT"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    .: {}
+                    'k:{"name":"X509_CA_BUNDLE"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"SSO_REALM"}':
+                      .: {}
+                      'f:name': {}
+                    'k:{"name":"SSO_SERVICE_USERNAME"}':
+                      .: {}
+                      'f:name': {}
+                    'k:{"name":"OPENSHIFT_DNS_PING_SERVICE_NAME"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"SSO_SERVICE_PASSWORD"}':
+                      .: {}
+                      'f:name': {}
+                    'k:{"name":"DB_MIN_POOL_SIZE"}':
+                      .: {}
+                      'f:name': {}
+                    'k:{"name":"SSO_ADMIN_USERNAME"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"SSO_ADMIN_PASSWORD"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                  'f:readinessProbe':
+                    .: {}
+                    'f:exec':
+                      .: {}
+                      'f:command': {}
+                    'f:failureThreshold': {}
+                    'f:periodSeconds': {}
+                    'f:successThreshold': {}
+                    'f:timeoutSeconds': {}
+                  'f:terminationMessagePath': {}
+                  'f:imagePullPolicy': {}
+                  'f:ports':
+                    .: {}
+                    'k:{"containerPort":8080,"protocol":"TCP"}':
+                      .: {}
+                      'f:containerPort': {}
+                      'f:name': {}
+                      'f:protocol': {}
+                    'k:{"containerPort":8443,"protocol":"TCP"}':
+                      .: {}
+                      'f:containerPort': {}
+                      'f:name': {}
+                      'f:protocol': {}
+                    'k:{"containerPort":8778,"protocol":"TCP"}':
+                      .: {}
+                      'f:containerPort': {}
+                      'f:name': {}
+                      'f:protocol': {}
+                    'k:{"containerPort":8888,"protocol":"TCP"}':
+                      .: {}
+                      'f:containerPort': {}
+                      'f:name': {}
+                      'f:protocol': {}
+                  'f:name': {}
+              'f:dnsPolicy': {}
+              'f:restartPolicy': {}
               .: {}
-              'f:name': {}
-              'f:secret':
-                .: {}
-                'f:defaultMode': {}
-                'f:secretName': {}
-          'f:containers':
-            'k:{"name":"keycloak"}':
-              'f:image': {}
-              'f:volumeMounts':
-                .: {}
-                'k:{"mountPath":"/etc/x509/https"}':
-                  .: {}
-                  'f:mountPath': {}
-                  'f:name': {}
-                  'f:readOnly': {}
-                'k:{"mountPath":"/mnt/rh-sso"}':
-                  .: {}
-                  'f:mountPath': {}
-                  'f:name': {}
-                'k:{"mountPath":"/var/run/configmaps/service-ca"}':
-                  .: {}
-                  'f:mountPath': {}
-                  'f:name': {}
-                  'f:readOnly': {}
-              'f:terminationMessagePolicy': {}
-              .: {}
-              'f:resources':
-                .: {}
-                'f:limits':
-                  .: {}
-                  'f:cpu': {}
-                  'f:memory': {}
-                'f:requests':
-                  .: {}
-                  'f:cpu': {}
-                  'f:memory': {}
-              'f:livenessProbe':
-                .: {}
-                'f:exec':
-                  .: {}
-                  'f:command': {}
-                'f:failureThreshold': {}
-                'f:initialDelaySeconds': {}
-                'f:periodSeconds': {}
-                'f:successThreshold': {}
-                'f:timeoutSeconds': {}
-              'f:env':
-                'k:{"name":"DB_TX_ISOLATION"}':
-                  .: {}
-                  'f:name': {}
-                'k:{"name":"SSO_HOSTNAME"}':
-                  .: {}
-                  'f:name': {}
-                'k:{"name":"DB_MAX_POOL_SIZE"}':
-                  .: {}
-                  'f:name': {}
-                'k:{"name":"OPENSHIFT_DNS_PING_SERVICE_PORT"}':
-                  .: {}
-                  'f:name': {}
-                  'f:value': {}
-                .: {}
-                'k:{"name":"X509_CA_BUNDLE"}':
-                  .: {}
-                  'f:name': {}
-                  'f:value': {}
-                'k:{"name":"SSO_REALM"}':
-                  .: {}
-                  'f:name': {}
-                'k:{"name":"SSO_SERVICE_USERNAME"}':
-                  .: {}
-                  'f:name': {}
-                'k:{"name":"OPENSHIFT_DNS_PING_SERVICE_NAME"}':
-                  .: {}
-                  'f:name': {}
-                  'f:value': {}
-                'k:{"name":"SSO_SERVICE_PASSWORD"}':
-                  .: {}
-                  'f:name': {}
-                'k:{"name":"DB_MIN_POOL_SIZE"}':
-                  .: {}
-                  'f:name': {}
-                'k:{"name":"SSO_ADMIN_USERNAME"}':
-                  .: {}
-                  'f:name': {}
-                  'f:value': {}
-                'k:{"name":"SSO_ADMIN_PASSWORD"}':
-                  .: {}
-                  'f:name': {}
-                  'f:value': {}
-              'f:readinessProbe':
-                .: {}
-                'f:exec':
-                  .: {}
-                  'f:command': {}
-                'f:failureThreshold': {}
-                'f:periodSeconds': {}
-                'f:successThreshold': {}
-                'f:timeoutSeconds': {}
-              'f:terminationMessagePath': {}
-              'f:imagePullPolicy': {}
-              'f:ports':
-                .: {}
-                'k:{"containerPort":8080,"protocol":"TCP"}':
-                  .: {}
-                  'f:containerPort': {}
-                  'f:name': {}
-                  'f:protocol': {}
-                'k:{"containerPort":8443,"protocol":"TCP"}':
-                  .: {}
-                  'f:containerPort': {}
-                  'f:name': {}
-                  'f:protocol': {}
-                'k:{"containerPort":8778,"protocol":"TCP"}':
-                  .: {}
-                  'f:containerPort': {}
-                  'f:name': {}
-                  'f:protocol': {}
-                'k:{"containerPort":8888,"protocol":"TCP"}':
-                  .: {}
-                  'f:containerPort': {}
-                  'f:name': {}
-                  'f:protocol': {}
-              'f:name': {}
-          'f:dnsPolicy': {}
-          'f:restartPolicy': {}
-          'f:schedulerName': {}
-          'f:nodeSelector': {}
-          'f:terminationGracePeriodSeconds': {}
-          'f:enableServiceLinks': {}
-          'f:securityContext': {}
-    - manager: multus
+              'f:schedulerName': {}
+              'f:nodeSelector': {}
+              'f:terminationGracePeriodSeconds': {}
+              'f:securityContext': {}
+          'f:triggers': {}
+    - manager: Mozilla
       operation: Update
-      apiVersion: v1
-      time: '2023-08-22T11:13:42Z'
+      apiVersion: apps.openshift.io/v1
+      time: '2023-09-25T11:26:26Z'
       fieldsType: FieldsV1
       fieldsV1:
-        'f:metadata':
-          'f:annotations':
-            'f:k8s.v1.cni.cncf.io/network-status': {}
-      subresource: status
-    - manager: kubelet
+        'f:spec':
+          'f:template':
+            'f:spec':
+              'f:containers':
+                'k:{"name":"keycloak"}':
+                  'f:readinessProbe':
+                    'f:initialDelaySeconds': {}
+    - manager: openshift-controller-manager
       operation: Update
-      apiVersion: v1
-      time: '2023-08-22T11:13:43Z'
+      apiVersion: apps.openshift.io/v1
+      time: '2023-09-25T11:28:22Z'
       fieldsType: FieldsV1
       fieldsV1:
         'f:status':
+          'f:availableReplicas': {}
           'f:conditions':
-            'k:{"type":"ContainersReady"}':
-              .: {}
-              'f:lastProbeTime': {}
-              'f:lastTransitionTime': {}
-              'f:message': {}
-              'f:reason': {}
-              'f:status': {}
-              'f:type': {}
-            'k:{"type":"Initialized"}':
-              .: {}
-              'f:lastProbeTime': {}
-              'f:lastTransitionTime': {}
-              'f:status': {}
-              'f:type': {}
-            'k:{"type":"Ready"}':
-              .: {}
-              'f:lastProbeTime': {}
-              'f:lastTransitionTime': {}
-              'f:message': {}
-              'f:reason': {}
-              'f:status': {}
-              'f:type': {}
-          'f:containerStatuses': {}
-          'f:hostIP': {}
-          'f:phase': {}
-          'f:podIP': {}
-          'f:podIPs':
             .: {}
-            'k:{"ip":"10.128.2.24"}':
+            'k:{"type":"Available"}':
               .: {}
-              'f:ip': {}
-          'f:startTime': {}
+              'f:lastTransitionTime': {}
+              'f:lastUpdateTime': {}
+              'f:message': {}
+              'f:status': {}
+              'f:type': {}
+            'k:{"type":"Progressing"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:lastUpdateTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+          'f:details':
+            .: {}
+            'f:causes': {}
+            'f:message': {}
+          'f:latestVersion': {}
+          'f:observedGeneration': {}
+          'f:replicas': {}
+          'f:unavailableReplicas': {}
+          'f:updatedReplicas': {}
       subresource: status
-  namespace: default
+  namespace: openshift-gitops
   ownerReferences:
-    - apiVersion: v1
-      kind: ReplicationController
-      name: keycloak-1
-      uid: ea0d3815-5095-48bf-8824-98b4b932e265
+    - apiVersion: argoproj.io/v1alpha1
+      kind: ArgoCD
+      name: openshift-gitops
+      uid: a74653f0-36af-4354-b9d0-efaa7d8f133c
       controller: true
-      blockOwnerDeletion: true
   labels:
     application: keycloak
-    deployment: keycloak-1
-    deploymentConfig: keycloak
-    deploymentconfig: keycloak
+    template.openshift.io/template-instance-owner: b851dcc2-91d5-4182-b7cd-af189f718b5e
 spec:
-  nodeSelector:
-    kubernetes.io/os: linux
-  restartPolicy: Always
-  serviceAccountName: default
-  imagePullSecrets:
-    - name: default-dockercfg-vkv8m
-  priority: 0
-  schedulerName: default-scheduler
-  enableServiceLinks: true
-  terminationGracePeriodSeconds: 75
-  preemptionPolicy: PreemptLowerPriority
-  nodeName: ip-10-0-130-142.ec2.internal
-  securityContext: {}
-  containers:
-    - resources:
-        limits:
-          cpu: '1'
-          memory: 1Gi
-        requests:
-          cpu: 500m
-          memory: 512Mi
-      readinessProbe:
-        exec:
-          command:
-            - /bin/bash
-            - '-c'
-            - /opt/eap/bin/readinessProbe.sh
-        timeoutSeconds: 1
-        periodSeconds: 10
-        successThreshold: 1
-        failureThreshold: 3
-      terminationMessagePath: /dev/termination-log
+  strategy:
+    type: Recreate
+    recreateParams:
+      timeoutSeconds: 600
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 250m
+        memory: 256Mi
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ConfigChange
+  replicas: 1
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    deploymentConfig: keycloak
+  template:
+    metadata:
       name: keycloak
-      livenessProbe:
-        exec:
-          command:
-            - /bin/bash
-            - '-c'
-            - /opt/eap/bin/livenessProbe.sh
-        initialDelaySeconds: 60
-        timeoutSeconds: 1
-        periodSeconds: 10
-        successThreshold: 1
-        failureThreshold: 3
-      env:
-        - name: SSO_HOSTNAME
-        - name: DB_MIN_POOL_SIZE
-        - name: DB_MAX_POOL_SIZE
-        - name: DB_TX_ISOLATION
-        - name: OPENSHIFT_DNS_PING_SERVICE_NAME
-          value: keycloak-ping
-        - name: OPENSHIFT_DNS_PING_SERVICE_PORT
-          value: '8888'
-        - name: X509_CA_BUNDLE
-          value: >-
-            /var/run/configmaps/service-ca/service-ca.crt
-            /var/run/secrets/kubernetes.io/serviceaccount/*.crt
-        - name: SSO_ADMIN_USERNAME
-          value: 2NCSHLAe
-        - name: SSO_ADMIN_PASSWORD
-          value: ODtnswdd
-        - name: SSO_REALM
-        - name: SSO_SERVICE_USERNAME
-        - name: SSO_SERVICE_PASSWORD
-      ports:
-        - name: jolokia
-          containerPort: 8778
-          protocol: TCP
-        - name: http
-          containerPort: 8080
-          protocol: TCP
-        - name: https
-          containerPort: 8443
-          protocol: TCP
-        - name: ping
-          containerPort: 8888
-          protocol: TCP
-      imagePullPolicy: Always
-      volumeMounts:
+      creationTimestamp: null
+      labels:
+        application: keycloak
+        deploymentConfig: keycloak
+    spec:
+      volumes:
         - name: sso-x509-https-volume
-          readOnly: true
-          mountPath: /etc/x509/https
+          secret:
+            secretName: sso-x509-https-secret
+            defaultMode: 420
         - name: service-ca
-          readOnly: true
-          mountPath: /var/run/configmaps/service-ca
+          configMap:
+            name: keycloak-service-ca
+            defaultMode: 420
         - name: sso-probe-netrc-volume
-          mountPath: /mnt/rh-sso
-        - name: kube-api-access-2zjd7
-          readOnly: true
-          mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-      terminationMessagePolicy: File
-      image: >-
-        registry.redhat.io/rh-sso-7/sso76-openshift-rhel8@sha256:bb6dc12a49370ba6baa40cfa064238cddcfd1edb22c37dcdf53d331c0f7ee15d
-  serviceAccount: default
-  volumes:
-    - name: sso-x509-https-volume
-      secret:
-        secretName: sso-x509-https-secret
-        defaultMode: 420
-    - name: service-ca
-      configMap:
-        name: keycloak-service-ca
-        defaultMode: 420
-    - name: sso-probe-netrc-volume
-      emptyDir:
-        medium: Memory
-    - name: kube-api-access-2zjd7
-      projected:
-        sources:
-          - serviceAccountToken:
-              expirationSeconds: 3607
-              path: token
-          - configMap:
-              name: kube-root-ca.crt
-              items:
-                - key: ca.crt
-                  path: ca.crt
-          - downwardAPI:
-              items:
-                - path: namespace
-                  fieldRef:
-                    apiVersion: v1
-                    fieldPath: metadata.namespace
-          - configMap:
-              name: openshift-service-ca.crt
-              items:
-                - key: service-ca.crt
-                  path: service-ca.crt
-        defaultMode: 420
-  dnsPolicy: ClusterFirst
-  tolerations:
-    - key: node.kubernetes.io/not-ready
-      operator: Exists
-      effect: NoExecute
-      tolerationSeconds: 300
-    - key: node.kubernetes.io/unreachable
-      operator: Exists
-      effect: NoExecute
-      tolerationSeconds: 300
-    - key: node.kubernetes.io/memory-pressure
-      operator: Exists
-      effect: NoSchedule
+          emptyDir:
+            medium: Memory
+      containers:
+        - resources:
+            limits:
+              cpu: '1'
+              memory: 1Gi
+            requests:
+              cpu: 500m
+              memory: 512Mi
+          readinessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - '-c'
+                - /opt/eap/bin/readinessProbe.sh
+            initialDelaySeconds: 60
+            timeoutSeconds: 120
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePath: /dev/termination-log
+          name: keycloak
+          livenessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - '-c'
+                - /opt/eap/bin/livenessProbe.sh
+            initialDelaySeconds: 60
+            timeoutSeconds: 120
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          env:
+            - name: SSO_HOSTNAME
+            - name: DB_MIN_POOL_SIZE
+            - name: DB_MAX_POOL_SIZE
+            - name: DB_TX_ISOLATION
+            - name: OPENSHIFT_DNS_PING_SERVICE_NAME
+              value: keycloak-ping
+            - name: OPENSHIFT_DNS_PING_SERVICE_PORT
+              value: '8888'
+            - name: X509_CA_BUNDLE
+              value: >-
+                /var/run/configmaps/service-ca/service-ca.crt
+                /var/run/secrets/kubernetes.io/serviceaccount/*.crt
+            - name: SSO_ADMIN_USERNAME
+              value: TPByvKHa
+            - name: SSO_ADMIN_PASSWORD
+              value: NBcfCIsN
+            - name: SSO_REALM
+            - name: SSO_SERVICE_USERNAME
+            - name: SSO_SERVICE_PASSWORD
+          ports:
+            - name: jolokia
+              containerPort: 8778
+              protocol: TCP
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: https
+              containerPort: 8443
+              protocol: TCP
+            - name: ping
+              containerPort: 8888
+              protocol: TCP
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: sso-x509-https-volume
+              readOnly: true
+              mountPath: /etc/x509/https
+            - name: service-ca
+              readOnly: true
+              mountPath: /var/run/configmaps/service-ca
+            - name: sso-probe-netrc-volume
+              mountPath: /mnt/rh-sso
+          terminationMessagePolicy: File
+          image: >-
+            registry.redhat.io/rh-sso-7/sso76-openshift-rhel8@sha256:ec9f60018694dcc5d431ba47d5536b761b71cb3f66684978fe6bb74c157679ac
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 75
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
+      securityContext: {}
+      schedulerName: default-scheduler
 status:
-  phase: Running
+  latestVersion: 2
+  observedGeneration: 2
+  replicas: 1
+  updatedReplicas: 1
+  availableReplicas: 0
+  unavailableReplicas: 1
+  details:
+    message: config change
+    causes:
+      - type: ConfigChange
   conditions:
-    - type: Initialized
-      status: 'True'
-      lastProbeTime: null
-      lastTransitionTime: '2023-08-22T11:13:41Z'
-    - type: Ready
+    - type: Available
       status: 'False'
-      lastProbeTime: null
-      lastTransitionTime: '2023-08-22T11:13:41Z'
-      reason: ContainersNotReady
-      message: 'containers with unready status: [keycloak]'
-    - type: ContainersReady
-      status: 'False'
-      lastProbeTime: null
-      lastTransitionTime: '2023-08-22T11:13:41Z'
-      reason: ContainersNotReady
-      message: 'containers with unready status: [keycloak]'
-    - type: PodScheduled
+      lastUpdateTime: '2023-09-25T11:28:19Z'
+      lastTransitionTime: '2023-09-25T11:28:19Z'
+      message: Deployment config does not have minimum availability.
+    - type: Progressing
       status: 'True'
-      lastProbeTime: null
-      lastTransitionTime: '2023-08-22T11:13:41Z'
-  hostIP: 10.0.130.142
-  podIP: 10.128.2.24
-  podIPs:
-    - ip: 10.128.2.24
-  startTime: '2023-08-22T11:13:41Z'
-  containerStatuses:
-    - restartCount: 0
-      started: true
-      ready: false
-      name: keycloak
-      state:
-        running:
-          startedAt: '2023-08-22T11:13:42Z'
-      imageID: >-
-        registry.redhat.io/rh-sso-7/sso76-openshift-rhel8@sha256:bb6dc12a49370ba6baa40cfa064238cddcfd1edb22c37dcdf53d331c0f7ee15d
-      image: >-
-        registry.redhat.io/rh-sso-7/sso76-openshift-rhel8@sha256:bb6dc12a49370ba6baa40cfa064238cddcfd1edb22c37dcdf53d331c0f7ee15d
-      lastState: {}
-      containerID: 'cri-o://e4eaadf106bda6e54d050a5b8e8e85eb13ff3be64e13ad90033741541e2b9ff4'
-  qosClass: Burstable
+      lastUpdateTime: '2023-09-25T11:28:22Z'
+      lastTransitionTime: '2023-09-25T11:26:34Z'
+      reason: NewReplicationControllerAvailable
+      message: replication controller "keycloak-2" successfully rolled out
